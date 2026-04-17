@@ -1,0 +1,43 @@
+{
+  "name": {
+    "ar": "ثيم لوكس دارك",
+    "en": "Luxe Dark Theme"
+  },
+  "repository": "https://github.com/your-org/salla-hellstar-theme",
+  "author": {
+    "name": "Senior Frontend Engineer",
+    "email": "dev@example.com"
+  },
+  "version": "1.0.0",
+  "settings": [
+    {
+      "type": "string",
+      "id": "hero_title",
+      "format": "text",
+      "label": {
+        "ar": "عنوان البانر",
+        "en": "Hero Title"
+      },
+      "value": "STUDIOS"
+    },
+    {
+      "type": "string",
+      "id": "hero_subtitle",
+      "format": "text",
+      "label": {
+        "ar": "العنوان الفرعي",
+        "en": "Hero Subtitle"
+      },
+      "value": "Minimal luxury pieces for modern wardrobes."
+    },
+    {
+      "type": "boolean",
+      "id": "enable_product_hover_swap",
+      "label": {
+        "ar": "تفعيل تبديل صورة المنتج عند المرور",
+        "en": "Enable Product Hover Image Swap"
+      },
+      "value": true
+    }
+  ]
+}

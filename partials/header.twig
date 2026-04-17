@@ -1,0 +1,11 @@
+<header class="site-header" data-sticky-header>
+  <div class="container header-inner">
+    <a class="logo" href="{{ routes.home|default('/') }}">{{ store.name|default('LUXE') }}</a>
+    <nav class="nav" aria-label="Main Navigation">
+      <a href="{{ routes.home|default('/') }}">Home</a>
+      <a href="{{ routes.collections|default('/collections') }}">Collections</a>
+      <a href="{{ routes.cart|default('/cart') }}">Cart</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" data-menu-toggle>Menu</button>
+  </div>
+</header>

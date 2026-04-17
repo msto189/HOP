@@ -1,0 +1,37 @@
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ store.name|default('Store') }}{% endblock %}
+
+{% block content %}
+  <section class="hero section">
+    <div class="container">
+      <p class="eyebrow">NEW SEASON</p>
+      <h1 class="hero-title">{{ theme.settings.hero_title|default('STUDIOS') }}</h1>
+      <p class="hero-subtitle">{{ theme.settings.hero_subtitle|default('Minimal luxury pieces for modern wardrobes.') }}</p>
+    </div>
+  </section>
+
+  <section class="section collection-preview">
+    <div class="container">
+      <div class="section-head">
+        <h2>Featured Collection</h2>
+        <a class="link-arrow" href="{{ routes.collections|default('/collections') }}">View All</a>
+      </div>
+      <div class="products-grid">
+        {% for product in products|default([])|slice(0, 8) %}
+          {% include "partials/product-card.twig" with { product: product } %}
+        {% else %}
+          <article class="product-card">
+            <a href="#" class="product-media">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop" alt="Preview product" />
+            </a>
+            <div class="product-meta">
+              <h3>Premium Tee</h3>
+              <p class="price">$120.00</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

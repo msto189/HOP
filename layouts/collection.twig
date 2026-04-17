@@ -1,0 +1,37 @@
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ category.name|default('Collection') }} | {{ store.name|default('Store') }}{% endblock %}
+
+{% block content %}
+  <section class="section collection-hero">
+    <div class="container">
+      <p class="eyebrow">COLLECTION</p>
+      <h1 class="page-title">{{ category.name|default('Studios') }}</h1>
+      {% if category.description %}
+        <p class="page-subtitle">{{ category.description }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="products-grid">
+        {% for product in products|default([]) %}
+          {% include "partials/product-card.twig" with { product: product } %}
+        {% else %}
+          {% for i in 1..8 %}
+            <article class="product-card">
+              <a href="#" class="product-media">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1200&auto=format&fit=crop" alt="Sample product" />
+              </a>
+              <div class="product-meta">
+                <h3>Studio Piece {{ i }}</h3>
+                <p class="price">$150.00</p>
+              </div>
+            </article>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
