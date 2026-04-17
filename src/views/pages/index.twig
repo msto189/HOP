@@ -1,6 +1,0 @@
-{% extends 'layouts/master' %}
-{% block content %}
-{% for component in components %}
-    {% include ['components/home/' ~ component.type, 'components/' ~ component.type] ignore missing with { component: component } %}
-{% endfor %}
-{% endblock %}
