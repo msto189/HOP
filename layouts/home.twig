@@ -1,0 +1,28 @@
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ store.name }}{% endblock %}
+
+{% block content %}
+  <section class="hero section">
+    <div class="container">
+      <p class="eyebrow">NEW SEASON</p>
+      <h1 class="hero-title">{{ theme.settings.hero_title }}</h1>
+      <p class="hero-subtitle">{{ theme.settings.hero_subtitle }}</p>
+    </div>
+  </section>
+
+  <section class="section collection-preview">
+    <div class="container">
+      <div class="section-head">
+        <h2>{{ store.name }}</h2>
+      </div>
+      <div class="products-grid">
+        {% if category.products %}
+          {% for product in category.products %}
+            {% include "components/product-card.twig" with { product: product } %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

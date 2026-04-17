@@ -1,0 +1,22 @@
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ category.name }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+  <section class="section category-hero">
+    <div class="container">
+      <p class="eyebrow">COLLECTION</p>
+      <h1 class="page-title">{{ category.name }}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="products-grid">
+        {% for product in category.products %}
+          {% include "components/product-card.twig" with { product: product } %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

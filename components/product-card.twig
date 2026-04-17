@@ -1,0 +1,16 @@
+<article class="product-card reveal">
+  <a href="{{ product.url }}" class="product-media">
+    {% for image in product.images|slice(0, 1) %}
+      <img loading="lazy" src="{{ image.url }}" alt="{{ product.name }}" class="primary-image" />
+    {% endfor %}
+    {% if theme.settings.enable_hover_effect %}
+      {% for image in product.images|slice(1, 1) %}
+        <img loading="lazy" src="{{ image.url }}" alt="{{ product.name }}" class="hover-image" />
+      {% endfor %}
+    {% endif %}
+  </a>
+  <div class="product-meta">
+    <h3>{{ product.name }}</h3>
+    <p class="price">{{ product.price | money }}</p>
+  </div>
+</article>

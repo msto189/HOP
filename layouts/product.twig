@@ -1,0 +1,26 @@
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ product.name }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+  <section class="section product-section">
+    <div class="container product-layout">
+      <div class="product-gallery">
+        {% for image in product.images|slice(0, 1) %}
+          <img loading="eager" src="{{ image.url }}" alt="{{ product.name }}" />
+        {% endfor %}
+      </div>
+      <div class="product-info">
+        <p class="eyebrow">LIMITED RELEASE</p>
+        <h1 class="product-title">{{ product.name }}</h1>
+        <p class="product-price">{{ product.price | money }}</p>
+
+        <form class="product-form" method="get" action="{{ product.url }}">
+          <label for="qty" class="visually-hidden">Quantity</label>
+          <input id="qty" type="number" min="1" value="1" class="qty-input" />
+          <button class="btn-primary" type="submit">View Product</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

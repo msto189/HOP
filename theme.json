@@ -1,0 +1,39 @@
+{
+  "name": "luxe-dark",
+  "version": "1.0.0",
+  "description": {
+    "en": "Premium dark fashion Salla theme",
+    "ar": "قالب سلة فاخر داكن للموضة"
+  },
+  "settings": [
+    {
+      "type": "string",
+      "id": "hero_title",
+      "format": "text",
+      "label": {
+        "en": "Hero title",
+        "ar": "عنوان البانر"
+      },
+      "value": "STUDIOS"
+    },
+    {
+      "type": "string",
+      "id": "hero_subtitle",
+      "format": "text",
+      "label": {
+        "en": "Hero subtitle",
+        "ar": "العنوان الفرعي"
+      },
+      "value": "Minimal luxury pieces for modern wardrobes."
+    },
+    {
+      "type": "boolean",
+      "id": "enable_hover_effect",
+      "label": {
+        "en": "Enable hover image swap",
+        "ar": "تفعيل تبديل الصورة عند المرور"
+      },
+      "value": true
+    }
+  ]
+}
