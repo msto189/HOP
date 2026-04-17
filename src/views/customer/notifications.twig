@@ -1,0 +1,22 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-account">
+    <div class="hop-container">
+        <div class="hop-account__layout">
+            {% include 'customer/sidebar' %}
+            <div class="hop-account__main">
+                <h1 class="hop-page-title">{{ trans('general.notifications') }}</h1>
+                <salla-notifications>
+                    <div class="hop-notifications">
+                        {% for n in notifications %}
+                        <div class="hop-notification {% if not n.is_read %}is-unread{% endif %}">
+                            <p>{{ n.text }}</p><span>{{ n.date }}</span>
+                        </div>
+                        {% else %}<p class="hop-empty">{{ trans('notifications.empty') }}</p>{% endfor %}
+                    </div>
+                </salla-notifications>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-blog-single">
+    <div class="hop-container hop-container--narrow">
+        <nav class="hop-breadcrumb"><a href="{{ store.url }}">{{ trans('general.home') }}</a> / <a href="{{ store.url }}/blog">{{ trans('blog.title') }}</a> / <span>{{ post.title }}</span></nav>
+        <h1 class="hop-blog-single__title">{{ post.title }}</h1>
+        <p class="hop-blog-single__date">{{ post.date }}</p>
+        {% if post.image %}<img src="{{ post.image }}" alt="{{ post.title }}" class="hop-blog-single__img" loading="eager">{% endif %}
+        <div class="hop-prose">{{ post.content }}</div>
+        {% include 'components/comments' %}
+    </div>
+</div>
+{% endblock %}

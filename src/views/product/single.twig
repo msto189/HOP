@@ -1,0 +1,84 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-product-single">
+    <div class="hop-container">
+        <nav class="hop-breadcrumb" aria-label="breadcrumb">
+            <a href="{{ store.url }}">{{ trans('general.home') }}</a>
+            {% if product.category %}/ <a href="{{ product.category.url }}">{{ product.category.name }}</a>{% endif %}
+            / <span>{{ product.name }}</span>
+        </nav>
+        <div class="hop-product-single__inner">
+            <div class="hop-gallery">
+                <div class="hop-gallery__main" id="gallery-main">
+                    {% for image in product.images %}
+                    <div class="hop-gallery__slide {% if loop.first %}is-active{% endif %}">
+                        <img src="{{ image.url }}" alt="{{ product.name }}" {% if loop.first %}loading="eager"{% else %}loading="lazy"{% endif %}>
+                    </div>
+                    {% else %}
+                    <div class="hop-gallery__slide is-active">
+                        <img src="{{ theme.settings.placeholder | asset }}" alt="{{ product.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if product.images | length > 1 %}
+                <div class="hop-gallery__thumbs">
+                    {% for image in product.images %}
+                    <button class="hop-gallery__thumb {% if loop.first %}is-active{% endif %}" data-idx="{{ loop.index0 }}">
+                        <img src="{{ image.url }}" alt="{{ product.name }}" loading="lazy">
+                    </button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="hop-product-single__info">
+                {% if product.brand %}<a href="{{ product.brand.url }}" class="hop-product-single__brand">{{ product.brand.name }}</a>{% endif %}
+                <h1 class="hop-product-single__title">{{ product.name }}</h1>
+                <div class="hop-product-single__price">
+                    {% if product.has_sale_price %}
+                    <s class="hop-price--original">{{ product.price.formatted }}</s>
+                    <span class="hop-price--sale">{{ product.sale_price.formatted }}</span>
+                    {% else %}
+                    <span>{{ product.price.formatted }}</span>
+                    {% endif %}
+                </div>
+                {% if product.short_description %}<p class="hop-product-single__desc">{{ product.short_description }}</p>{% endif %}
+                <salla-add-product-button product-id="{{ product.id }}">
+                    <div class="hop-product-form">
+                        {% include 'partials/product/options' %}
+                        <div class="hop-qty">
+                            <button class="hop-qty__btn hop-qty__minus" type="button">-</button>
+                            <input type="number" name="quantity" value="1" min="1" class="hop-qty__input">
+                            <button class="hop-qty__btn hop-qty__plus" type="button">+</button>
+                        </div>
+                        <div class="hop-product-form__actions">
+                            <button type="submit" class="hop-btn hop-btn--full {% if product.is_out_of_stock %}hop-btn--disabled{% endif %}" {% if product.is_out_of_stock %}disabled{% endif %}>
+                                {% if product.is_out_of_stock %}{{ trans('product.sold_out') }}{% else %}{{ trans('product.add_to_cart') }}{% endif %}
+                            </button>
+                            <salla-wishlist-button product-id="{{ product.id }}">
+                                <button class="hop-btn hop-btn--icon hop-btn--outline" type="button" aria-label="{{ trans('product.wishlist') }}">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                                </button>
+                            </salla-wishlist-button>
+                        </div>
+                    </div>
+                </salla-add-product-button>
+                {% if product.sku %}<p class="hop-product-single__sku">{{ trans('product.sku') }}: {{ product.sku }}</p>{% endif %}
+            </div>
+        </div>
+        {% if product.description %}
+        <div class="hop-product-single__desc-full">
+            <h2>{{ trans('product.description') }}</h2>
+            <div class="hop-prose">{{ product.description }}</div>
+        </div>
+        {% endif %}
+        {% if related_products %}
+        <div class="hop-related">
+            <h2 class="hop-section-title">{{ trans('product.related') }}</h2>
+            <div class="hop-products-grid">
+                {% for product in related_products %}{% include 'partials/product/card' %}{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

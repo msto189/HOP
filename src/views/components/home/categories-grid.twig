@@ -1,0 +1,16 @@
+{% if component.categories is not empty %}
+<section class="hop-cats">
+    <div class="hop-container">
+        {% if component.title %}<h2 class="hop-section-title">{{ component.title }}</h2>{% endif %}
+        <div class="hop-cats__grid">
+            {% for cat in component.categories %}
+            <a href="{{ cat.url }}" class="hop-cat">
+                {% if cat.image %}<img src="{{ cat.image }}" alt="{{ cat.name }}" loading="lazy" class="hop-cat__img">{% endif %}
+                <div class="hop-cat__overlay"></div>
+                <span class="hop-cat__name">{{ cat.name }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

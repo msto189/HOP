@@ -1,0 +1,28 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-account">
+    <div class="hop-container">
+        <div class="hop-account__layout">
+            {% include 'customer/sidebar' %}
+            <div class="hop-account__main">
+                <div class="hop-order-detail__head">
+                    <h1 class="hop-page-title">#{{ order.reference_id }}</h1>
+                    <span class="hop-order-status hop-order-status--{{ order.status.slug }}">{{ order.status.name }}</span>
+                </div>
+                {% for item in order.items %}
+                <div class="hop-order-item">
+                    <img src="{{ item.product.image }}" alt="{{ item.product.name }}" loading="lazy">
+                    <div><p>{{ item.product.name }}</p><p>x{{ item.quantity }}</p></div>
+                    <p>{{ item.total.formatted }}</p>
+                </div>
+                {% endfor %}
+                <div class="hop-order-totals">
+                    <div><span>{{ trans('cart.subtotal') }}</span><span>{{ order.amounts.subtotal.formatted }}</span></div>
+                    {% if order.amounts.shipping %}<div><span>{{ trans('cart.shipping') }}</span><span>{{ order.amounts.shipping.formatted }}</span></div>{% endif %}
+                    <div class="hop-order-totals--total"><span>{{ trans('cart.total') }}</span><span>{{ order.amounts.total.formatted }}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

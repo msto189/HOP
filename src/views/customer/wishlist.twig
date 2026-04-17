@@ -1,0 +1,18 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-account">
+    <div class="hop-container">
+        <div class="hop-account__layout">
+            {% include 'customer/sidebar' %}
+            <div class="hop-account__main">
+                <h1 class="hop-page-title">{{ trans('general.wishlist') }}</h1>
+                <salla-wishlist>
+                    <div class="hop-products-grid">
+                        {% for product in wishlist %}{% include 'partials/product/card' %}{% else %}<p class="hop-empty">{{ trans('wishlist.empty') }}</p>{% endfor %}
+                    </div>
+                </salla-wishlist>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

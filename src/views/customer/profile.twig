@@ -1,0 +1,24 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-account">
+    <div class="hop-container">
+        <div class="hop-account__layout">
+            {% include 'customer/sidebar' %}
+            <div class="hop-account__main">
+                <h1 class="hop-page-title">{{ trans('customer.profile') }}</h1>
+                <salla-user-form>
+                    <div class="hop-form">
+                        <div class="hop-form__row">
+                            <div class="hop-form__group"><label>{{ trans('customer.first_name') }}</label><input type="text" name="first_name" value="{{ customer.first_name }}" class="hop-input"></div>
+                            <div class="hop-form__group"><label>{{ trans('customer.last_name') }}</label><input type="text" name="last_name" value="{{ customer.last_name }}" class="hop-input"></div>
+                        </div>
+                        <div class="hop-form__group"><label>{{ trans('customer.email') }}</label><input type="email" name="email" value="{{ customer.email }}" class="hop-input"></div>
+                        <div class="hop-form__group"><label>{{ trans('customer.mobile') }}</label><input type="tel" name="mobile" value="{{ customer.mobile }}" class="hop-input"></div>
+                        <button type="submit" class="hop-btn">{{ trans('customer.save') }}</button>
+                    </div>
+                </salla-user-form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

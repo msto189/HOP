@@ -1,0 +1,30 @@
+{% if component.slides is not empty %}
+<section class="hop-hero" id="hop-hero">
+    <div class="hop-hero__wrap">
+        {% for slide in component.slides %}
+        <div class="hop-hero__slide {% if loop.first %}is-active{% endif %}" data-idx="{{ loop.index0 }}">
+            {% if slide.image %}
+            <img src="{{ slide.image }}" alt="{{ slide.title ?? '' }}" class="hop-hero__img" {% if loop.first %}loading="eager"{% else %}loading="lazy"{% endif %}>
+            {% endif %}
+            <div class="hop-hero__overlay"></div>
+            <div class="hop-hero__content hop-container">
+                {% if slide.title %}<h1 class="hop-hero__title">{{ slide.title }}</h1>{% endif %}
+                {% if slide.subtitle %}<p class="hop-hero__sub">{{ slide.subtitle }}</p>{% endif %}
+                {% if slide.btn_text and slide.btn_url %}
+                <a href="{{ slide.btn_url }}" class="hop-btn hop-btn--white">{{ slide.btn_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if component.slides | length > 1 %}
+    <button class="hop-hero__arrow hop-hero__arrow--prev" id="hero-prev" aria-label="prev">&#8249;</button>
+    <button class="hop-hero__arrow hop-hero__arrow--next" id="hero-next" aria-label="next">&#8250;</button>
+    <div class="hop-hero__dots">
+        {% for slide in component.slides %}
+        <button class="hop-hero__dot {% if loop.first %}is-active{% endif %}" data-idx="{{ loop.index0 }}" aria-label="slide {{ loop.index }}"></button>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+{% endif %}

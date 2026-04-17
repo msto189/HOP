@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ store.language }}" dir="{{ store.direction }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description ?? store.description }}">
+    <title>{{ page.title ?? store.name }}</title>
+    {{ hook('head.open') }}
+    <link rel="icon" href="{{ store.icon }}">
+    {% if theme.font %}
+    <link rel="stylesheet" href="{{ theme.font.url }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ 'styles/app.css' | asset }}">
+    <style>
+      :root {
+        --color-primary: {{ theme.color ?? '#000' }};
+        --font-main: {% if theme.font %}'{{ theme.font.name }}', {% endif %}sans-serif;
+      }
+    </style>
+    {{ hook('head.close') }}
+</head>
+<body class="hop {% if theme.settings.topnav_is_dark %}nav-dark{% endif %}">
+    {{ hook('body.open') }}
+
+    {% if theme.settings.show_announcement_bar and theme.settings.announcement_text %}
+    <div class="hop-announce" id="hop-announce">
+        <p>{{ theme.settings.announcement_text }}</p>
+        <button onclick="this.parentElement.remove()" aria-label="close">&#x2715;</button>
+    </div>
+    {% endif %}
+
+    {% include 'components/header/header' %}
+
+    <main id="main">{{ block('content') }}</main>
+
+    {% include 'components/footer/footer' %}
+
+    <button id="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="back to top">&#8679;</button>
+
+    <salla-cart-summary></salla-cart-summary>
+
+    <script src="{{ 'js/app.js' | asset }}" defer></script>
+    {{ hook('body.close') }}
+</body>
+</html>

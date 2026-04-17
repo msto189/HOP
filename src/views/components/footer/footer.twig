@@ -1,0 +1,67 @@
+<footer class="hop-footer {% if theme.settings.footer_is_dark %}hop-footer--dark{% endif %}">
+    <div class="hop-footer__top">
+        <div class="hop-container">
+            <div class="hop-footer__grid">
+                <div class="hop-footer__brand">
+                    {% if store.logo %}
+                    <a href="{{ store.url }}"><img src="{{ store.logo }}" alt="{{ store.name }}" height="36" class="{% if theme.settings.footer_is_dark %}invert{% endif %}"></a>
+                    {% else %}
+                    <a href="{{ store.url }}" class="hop-footer__name">{{ store.name }}</a>
+                    {% endif %}
+                    <p>{{ store.description }}</p>
+                    {% if store.social %}
+                    <div class="hop-social">
+                        {% if store.social.twitter %}<a href="{{ store.social.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+                        </a>{% endif %}
+                        {% if store.social.instagram %}<a href="{{ store.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>{% endif %}
+                        {% if store.social.snapchat %}<a href="{{ store.social.snapchat }}" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 3c-2.518 0-5.042 1.23-5.858 3.866-.223.717-.164 1.467-.133 2.204l-.027.002c-.25 0-.673-.067-1.014-.264a.668.668 0 00-.353-.099c-.213 0-.416.1-.527.286-.104.175-.104.395.01.609.207.387.8.763 1.753.934-.034.12-.06.245-.06.379 0 .138.016.232.037.31-.658.073-1.424.216-1.942.599-.39.29-.573.676-.51 1.074.095.62.733.79 1.23.79.18 0 .363-.016.546-.04.258-.035.487-.067.666-.067.087 0 .167.008.24.022-.068.116-.163.26-.29.42-.412.519-1.034 1.303-1.034 2.275 0 1.516 1.494 2.47 3.981 2.47.424 0 .848-.041 1.256-.114.393.274.856.435 1.36.435.504 0 .967-.161 1.36-.435.408.073.832.114 1.256.114 2.487 0 3.981-.954 3.981-2.47 0-.972-.622-1.756-1.034-2.275-.127-.16-.222-.304-.29-.42.073-.014.153-.022.24-.022.179 0 .408.032.666.067.175.024.355.04.546.04.497 0 1.135-.17 1.23-.79.063-.398-.12-.784-.51-1.074-.518-.383-1.284-.526-1.942-.599.021-.078.037-.172.037-.31 0-.134-.026-.259-.06-.379.953-.171 1.546-.547 1.753-.934.114-.214.114-.434.01-.609-.111-.186-.314-.286-.527-.286a.668.668 0 00-.353.099c-.341.197-.764.264-1.014.264l-.027-.002c.031-.737.09-1.487-.133-2.204C17.208 4.23 14.684 3 12.166 3z"/></svg>
+                        </a>{% endif %}
+                        {% if store.social.tiktok %}<a href="{{ store.social.tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.87a8.18 8.18 0 004.79 1.52V7a4.85 4.85 0 01-1.02-.31z"/></svg>
+                        </a>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="hop-footer__links">
+                    <h4>{{ trans('footer.quick_links') }}</h4>
+                    <ul>
+                        <li><a href="{{ store.url }}">{{ trans('general.home') }}</a></li>
+                        {% for category in categories | slice(0,5) %}
+                        <li><a href="{{ category.url }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="hop-footer__links">
+                    <h4>{{ trans('footer.customer_service') }}</h4>
+                    <ul>
+                        <li><a href="{{ store.url }}/customer/profile">{{ trans('customer.my_account') }}</a></li>
+                        <li><a href="{{ store.url }}/customer/orders">{{ trans('customer.order_history') }}</a></li>
+                        {% for page in pages %}
+                        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="hop-footer__newsletter">
+                    <h4>{{ trans('footer.newsletter') }}</h4>
+                    <p>{{ trans('footer.newsletter_desc') }}</p>
+                    <salla-newsletter>
+                        <div class="hop-newsletter">
+                            <input type="email" name="email" placeholder="{{ trans('footer.email_placeholder') }}" class="hop-newsletter__input">
+                            <button type="submit" class="hop-newsletter__btn">{{ trans('footer.subscribe') }}</button>
+                        </div>
+                    </salla-newsletter>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hop-footer__bottom">
+        <div class="hop-container">
+            <p>&copy; {{ 'now'|date('Y') }} {{ store.name }}. {{ trans('footer.rights') }}</p>
+            <salla-payment-icons></salla-payment-icons>
+        </div>
+    </div>
+</footer>

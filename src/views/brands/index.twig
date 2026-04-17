@@ -1,0 +1,15 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-brands-page">
+    <div class="hop-container">
+        <h1 class="hop-page-title">{{ trans('brands.title') }}</h1>
+        <div class="hop-brands-grid">
+            {% for brand in brands %}
+            <a href="{{ brand.url }}" class="hop-brand-card">
+                {% if brand.logo %}<img src="{{ brand.logo }}" alt="{{ brand.name }}" loading="lazy">{% else %}<span>{{ brand.name }}</span>{% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

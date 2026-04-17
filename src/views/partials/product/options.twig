@@ -1,0 +1,22 @@
+{% if product.options %}
+<div class="hop-options">
+    {% for option in product.options %}
+    <div class="hop-option">
+        <label class="hop-option__label">{{ option.name }}</label>
+        {% if option.display_type == 'color' %}
+        <div class="hop-option__colors">
+            {% for val in option.values %}
+            <button class="hop-color-swatch" style="background:{{ val.color }}" title="{{ val.name }}" data-option="{{ option.id }}" data-value="{{ val.id }}" aria-label="{{ val.name }}"></button>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="hop-option__btns">
+            {% for val in option.values %}
+            <button class="hop-option__btn" data-option="{{ option.id }}" data-value="{{ val.id }}">{{ val.name }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

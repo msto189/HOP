@@ -1,0 +1,11 @@
+<article class="hop-fullcard">
+    <a href="{{ product.url }}">
+        {% if product.images.first %}
+        <img src="{{ product.images.first.url }}" alt="{{ product.name }}" loading="lazy">
+        {% endif %}
+        <div class="hop-fullcard__overlay">
+            <p class="hop-fullcard__name">{{ product.name }}</p>
+            <p class="hop-fullcard__price">{{ product.price.formatted }}</p>
+        </div>
+    </a>
+</article>

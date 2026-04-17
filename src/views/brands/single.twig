@@ -1,0 +1,16 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-brand-single">
+    <div class="hop-container">
+        <div class="hop-brand-single__head">
+            {% if brand.logo %}<img src="{{ brand.logo }}" alt="{{ brand.name }}" class="hop-brand-single__logo">{% endif %}
+            <h1>{{ brand.name }}</h1>
+            {% if brand.description %}<p>{{ brand.description }}</p>{% endif %}
+        </div>
+        <div class="hop-products-grid">
+            {% for product in products %}{% include 'partials/product/card' %}{% endfor %}
+        </div>
+        {% if pagination.total_pages > 1 %}<div class="hop-pagination"><salla-pagination>{{ pagination_html }}</salla-pagination></div>{% endif %}
+    </div>
+</div>
+{% endblock %}

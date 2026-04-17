@@ -1,0 +1,13 @@
+<aside class="hop-account__sidebar">
+    <div class="hop-account__user">
+        <div class="hop-account__avatar">{{ customer.first_name | first | upper }}</div>
+        <p>{{ customer.first_name }} {{ customer.last_name }}</p>
+    </div>
+    <nav>
+        <a href="{{ store.url }}/customer/profile" {% if page.type == 'profile' %}class="is-active"{% endif %}>{{ trans('customer.profile') }}</a>
+        <a href="{{ store.url }}/customer/orders" {% if page.type == 'orders' %}class="is-active"{% endif %}>{{ trans('customer.orders') }}</a>
+        <a href="{{ store.url }}/customer/wishlist" {% if page.type == 'wishlist' %}class="is-active"{% endif %}>{{ trans('general.wishlist') }}</a>
+        <a href="{{ store.url }}/customer/notifications" {% if page.type == 'notifications' %}class="is-active"{% endif %}>{{ trans('general.notifications') }}</a>
+        <a href="{{ logout_url }}">{{ trans('general.logout') }}</a>
+    </nav>
+</aside>

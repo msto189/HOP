@@ -1,0 +1,37 @@
+<article class="hop-product-card">
+    <a href="{{ product.url }}" class="hop-product-card__link">
+        <div class="hop-product-card__media">
+            {% set img1 = product.images.first %}
+            {% set img2 = product.images.second %}
+            {% if img1 %}
+            <img src="{{ img1.url }}" alt="{{ product.name }}" class="hop-product-card__img hop-product-card__img--1" loading="lazy">
+            {% if img2 %}
+            <img src="{{ img2.url }}" alt="{{ product.name }}" class="hop-product-card__img hop-product-card__img--2" loading="lazy">
+            {% endif %}
+            {% else %}
+            <img src="{{ theme.settings.placeholder | asset }}" alt="{{ product.name }}" class="hop-product-card__img" loading="lazy">
+            {% endif %}
+            <div class="hop-product-card__badges">
+                {% if product.is_new %}<span class="hop-badge">{{ trans('product.new') }}</span>{% endif %}
+                {% if product.has_sale_price %}<span class="hop-badge hop-badge--sale">{{ product.discount_percentage }}%</span>{% endif %}
+                {% if product.is_out_of_stock %}<span class="hop-badge hop-badge--sold">{{ trans('product.sold_out') }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="hop-product-card__info">
+            <p class="hop-product-card__name">{{ product.name }}</p>
+            <div class="hop-product-card__price">
+                {% if product.has_sale_price %}
+                <s class="hop-product-card__original">{{ product.price.formatted }}</s>
+                <span class="hop-product-card__sale">{{ product.sale_price.formatted }}</span>
+                {% else %}
+                <span>{{ product.price.formatted }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+    <salla-add-product-button product-id="{{ product.id }}">
+        <button class="hop-product-card__add {% if product.is_out_of_stock %}is-soldout{% endif %}" {% if product.is_out_of_stock %}disabled{% endif %}>
+            {% if product.is_out_of_stock %}{{ trans('product.sold_out') }}{% else %}{{ trans('product.add_to_cart') }}{% endif %}
+        </button>
+    </salla-add-product-button>
+</article>

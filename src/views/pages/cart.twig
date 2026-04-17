@@ -1,0 +1,61 @@
+{% extends 'layouts/master' %}
+{% block content %}
+<div class="hop-cart-page">
+    <div class="hop-container">
+        <h1 class="hop-page-title">{{ trans('cart.title') }}</h1>
+        {% if cart.count > 0 %}
+        <div class="hop-cart-layout">
+            <div class="hop-cart-items">
+                <salla-cart>
+                {% for item in cart.items %}
+                <div class="hop-cart-item">
+                    <a href="{{ item.product.url }}" class="hop-cart-item__img"><img src="{{ item.product.image }}" alt="{{ item.product.name }}" loading="lazy"></a>
+                    <div class="hop-cart-item__body">
+                        <a href="{{ item.product.url }}" class="hop-cart-item__name">{{ item.product.name }}</a>
+                        {% if item.options %}
+                        <div class="hop-cart-item__opts">{% for o in item.options %}<span>{{ o.name }}: {{ o.value }}</span>{% endfor %}</div>
+                        {% endif %}
+                        <p class="hop-cart-item__price">{{ item.price.formatted }}</p>
+                    </div>
+                    <salla-quantity-input item-id="{{ item.id }}">
+                        <div class="hop-qty">
+                            <button class="hop-qty__btn hop-qty__minus">-</button>
+                            <input type="number" value="{{ item.quantity }}" min="1" class="hop-qty__input">
+                            <button class="hop-qty__btn hop-qty__plus">+</button>
+                        </div>
+                    </salla-quantity-input>
+                    <p class="hop-cart-item__total">{{ item.total.formatted }}</p>
+                    <salla-remove-from-cart item-id="{{ item.id }}">
+                        <button class="hop-cart-item__remove" aria-label="{{ trans('cart.remove') }}">&#x2715;</button>
+                    </salla-remove-from-cart>
+                </div>
+                {% endfor %}
+                </salla-cart>
+            </div>
+            <div class="hop-cart-summary">
+                <h2>{{ trans('cart.summary') }}</h2>
+                <salla-coupon>
+                    <div class="hop-coupon">
+                        <input type="text" name="coupon" placeholder="{{ trans('cart.coupon') }}" class="hop-input">
+                        <button type="submit" class="hop-btn hop-btn--outline">{{ trans('cart.apply') }}</button>
+                    </div>
+                </salla-coupon>
+                <div class="hop-cart-totals">
+                    <div class="hop-cart-totals__row"><span>{{ trans('cart.subtotal') }}</span><span>{{ cart.subtotal.formatted }}</span></div>
+                    {% if cart.discount %}<div class="hop-cart-totals__row hop-cart-totals__row--discount"><span>{{ trans('cart.discount') }}</span><span>-{{ cart.discount.formatted }}</span></div>{% endif %}
+                    {% if cart.shipping %}<div class="hop-cart-totals__row"><span>{{ trans('cart.shipping') }}</span><span>{{ cart.shipping.formatted }}</span></div>{% endif %}
+                    <div class="hop-cart-totals__row hop-cart-totals__row--total"><span>{{ trans('cart.total') }}</span><span>{{ cart.total.formatted }}</span></div>
+                </div>
+                <salla-checkout-button><button class="hop-btn hop-btn--full">{{ trans('cart.checkout') }}</button></salla-checkout-button>
+                <a href="{{ store.url }}/products" class="hop-cart-summary__continue">{{ trans('cart.continue') }}</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="hop-empty-state">
+            <p>{{ trans('cart.empty') }}</p>
+            <a href="{{ store.url }}/products" class="hop-btn">{{ trans('cart.shop') }}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
